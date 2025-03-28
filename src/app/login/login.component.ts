@@ -59,14 +59,14 @@ export class LoginComponent {
         success => {
           if (success) {
             this.toastr.success('Logged in successfully');
-            this.router.navigate(['/records']);  // Correct the route here
+            this.router.navigate(['/records']);
           } else {
             this.errorMessage = 'Incorrect Phone Number or Password';
           }
           this.loading = false;
         },
         error => {
-          console.error(error);  // Log error to check details
+          console.error(error); 
           this.errorMessage = error.status === 401
             ? 'Unauthorized: Incorrect credentials'
             : 'An error occurred during login.';

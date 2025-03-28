@@ -115,12 +115,14 @@ export class ExpensesComponent {
     if (confirmDelete) {
       this.expenseService.deleteExpenseRecord(expense.id!).subscribe({
         next: () => {
-          this.loadExpenses();
+          this.expenseService.fetchExpenseRecords(); // Refresh UI
+          console.log(`Expense with ID ${expense.id} deleted.`);
         },
         error: (err) => console.error('Error deleting expense:', err)
       });
     }
   }
+  
 
   setPagination() {
     this.totalPages = Math.ceil(this.filteredExpenses.length / this.pageSize);

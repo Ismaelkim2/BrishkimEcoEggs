@@ -11,8 +11,8 @@ import { ServiceService } from '../service.service';
 export class FaqComponent implements OnInit {
   faqs: { question: string, answer: string }[] = [
     {
-      question: 'What is Agri-Business Market Hub?',
-      answer: 'Agri-Business Market Hub is a platform designed to bridge the gap between farmers and the market, offering services like consulting, market analysis, supply chain management, product sales, and delivery services.'
+      question: 'What is EcoEggs Market Hub?',
+      answer: 'EcoEggsFarm Market Hub is a platform designed to bridge the gap between farmers and the market, offering services like consulting, market analysis, supply chain management, product sales, and delivery services.'
     },
     {
       question: 'How can I join the platform?',

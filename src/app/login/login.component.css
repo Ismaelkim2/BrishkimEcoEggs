@@ -23,7 +23,7 @@
 
 form {
   position: relative;
-  max-width: 480px;
+  max-width: 380px;
   width: 100%;
   margin: 0 auto;
 }
@@ -50,20 +50,20 @@ form {
 }
 
 .welcome-message h3 {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
   color: #28a745;
 }
 
 .welcome-message p {
-  font-size: 16px;
-  color: #fff;
+  font-size: 14px;
+  color: #439b31;
   text-shadow: 1px 1px 2px rgba(74, 241, 124, 0.5);
 }
 
 .formdiv {
   position: absolute;
-  max-width: 480px;
+  max-width: 380px;
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -137,7 +137,6 @@ form {
   cursor: pointer;
   text-decoration: underline;
   text-align: center;
-  margin-top: 20px;
 }
 
 
@@ -173,8 +172,13 @@ form {
   .formdiv {
     width: 90%;
     max-width: 90%;
+    top: 40%;
   }
 
+  .forgot-password {
+    margin-top: 5px;
+  }
+  
   .welcome-message h3 {
     font-size: 22px;
   }

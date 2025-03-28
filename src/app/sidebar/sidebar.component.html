@@ -106,75 +106,86 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="/records"><i class="fa fa-chart-line"
               routerLinkActive="active-link" 
-        [routerLinkActiveOptions]="{ exact: true }"></i> Dashboard</a>
+        [routerLinkActiveOptions]="{ exact: true }"></i> {{ 'Dashboard' | translate }}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/farm-data"
             routerLinkActive="active-link" 
-            [routerLinkActiveOptions]="{ exact: true }" ><i class="fa fa-book"></i> Records</a>
+            [routerLinkActiveOptions]="{ exact: true }" ><i class="fa fa-book"></i> {{ 'Records' | translate }}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/sales"
             routerLinkActive="active-link" 
-        [routerLinkActiveOptions]="{ exact: true }"><i class="fa fa-money-bill"></i> Sales</a>
+        [routerLinkActiveOptions]="{ exact: true }"><i class="fa fa-money-bill"></i> {{ 'Sales' | translate }}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/expenses"
             routerLinkActive="active-link" 
-        [routerLinkActiveOptions]="{ exact: true }"><i class="fa fa-book"></i> Expenses</a>
+        [routerLinkActiveOptions]="{ exact: true }"><i class="fa fa-book"></i> {{ 'Expenses' | translate }}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/eggs-record-list"
             routerLinkActive="active-link" 
-            [routerLinkActiveOptions]="{ exact: true }" ><i class="fa fa-egg"></i> Eggs Production</a>
+            [routerLinkActiveOptions]="{ exact: true }" ><i class="fa fa-egg"></i> {{ 'Eggs' | translate }}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/workers"
             routerLinkActive="active-link" 
-        [routerLinkActiveOptions]="{ exact: true }"><i class="fa fa-people-group"></i> Workers</a>
+        [routerLinkActiveOptions]="{ exact: true }"><i class="fa fa-people-group"></i> {{ 'Workers' | translate }}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/customers"
             routerLinkActive="active-link" 
-        [routerLinkActiveOptions]="{ exact: true }"><i class="fa fa-bag-shopping"></i> Customers</a>
+        [routerLinkActiveOptions]="{ exact: true }"><i class="fa fa-bag-shopping"></i> {{ 'Customers' | translate }}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/mortalities"
             routerLinkActive="active-link" 
-        [routerLinkActiveOptions]="{ exact: true }"><i class="fa fa-skull-crossbones"></i> Mortalities</a>
+        [routerLinkActiveOptions]="{ exact: true }"><i class="fa fa-skull-crossbones"></i> {{ 'Mortalities' | translate }}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/our-services"
             routerLinkActive="active-link" 
-        [routerLinkActiveOptions]="{ exact: true }"><i class="fa fa-leaf"></i> Our Services</a>
+        [routerLinkActiveOptions]="{ exact: true }"><i class="fa fa-leaf"></i> {{ 'Our Services' | translate }}</a>
           </li>
       
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"
             routerLinkActive="active-link" 
-            [routerLinkActiveOptions]="{ exact: true }" ><i class="fa fa-bars"></i> More</a>
+            [routerLinkActiveOptions]="{ exact: true }" ><i class="fa fa-bars"></i> {{ 'More' | translate }}</a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" (click)="navigateTo('/about-us')"
                 routerLinkActive="active-link" 
-                [routerLinkActiveOptions]="{ exact: true }" >About Us</a></li>
+                [routerLinkActiveOptions]="{ exact: true }" >{{ 'About Us' | translate }}</a></li>
               <li><a class="dropdown-item" (click)="navigateTo('contact')"
                 routerLinkActive="active-link" 
-        [routerLinkActiveOptions]="{ exact: true }">Contact Us</a></li>
+        [routerLinkActiveOptions]="{ exact: true }">{{ 'Contact Us' | translate }}</a></li>
               <li><a class="dropdown-item" (click)="navigateTo('/faq')"
                 routerLinkActive="active-link" 
-        [routerLinkActiveOptions]="{ exact: true }">FAQ</a></li>
+        [routerLinkActiveOptions]="{ exact: true }">{{ 'FAQ' | translate }}</a></li>
             </ul>
           </li>
         </ul>
 
         <ul class=" d-flex no-bullets " style="background-color:#caccce !important;">
-         
-          <div class="d-flex justify-content-center align-items-center gap-2" *ngIf="!loggedInUser" >
-            <button (click)="SignIn()" class="btn btn-success bg-success">Sign In</button>
-            <button (click)="SignUp()" class="btn btn-success bg-success">Sign Up</button>
+
+          <div class="d-flex justify-content-center align-items-center me-2" style="margin-top: 4px;">
+            <button 
+              class="btn btn-primary" 
+              (click)="toggleLanguage()" 
+              style="width: 100px; height: 40px; font-size: 16px; font-weight: bold;">
+              {{ currentLanguage === 'en' ? 'English' : 'Kiswahili' }}
+            </button>
           </div>
           
-        
+          
+
+          <div class="d-flex justify-content-center align-items-center gap-2" *ngIf="!loggedInUser" >
+            <button (click)="SignIn()" class="btn btn-success bg-success">{{ 'Sign In' | translate }}</button>
+            <button (click)="SignUp()" class="btn btn-success bg-success">{{ 'Sign Up' | translate }}</button>
+          </div>
+
+     
           <li class="nav-item d-flex align-items-center" *ngIf="loggedInUser">
            
             <div class="user-info d-flex align-items-center ms-3" routerLink="/settings">
@@ -222,31 +233,31 @@
     <li class="nav-item">
       <a class="nav-link" routerLink="/records" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
         <i class="fa fa-house"></i>
-        <span>Home</span>
+        <span>{{ 'Home' | translate }}</span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" routerLink="/eggs-record-list" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
         <i class="fa fa-egg"></i>
-        <span>Eggs</span>
+        <span>{{ 'Eggs' | translate }}</span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" routerLink="/farm-data" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
         <i class="fa fa-book"></i>
-        <span>Records</span>
+        <span>{{ 'Records' | translate }}</span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" routerLink="/sales" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
         <i class="fa fa-money-bill"></i>
-        <span>Sales</span>
+        <span>{{ 'Sales' | translate }}</span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" routerLink="/expenses" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
         <i class="fa fa-chart-pie"></i>
-        <span>Expenses</span>
+        <span>{{ 'Expenses' | translate }}</span>
       </a>
     </li>
   </ul>
@@ -256,47 +267,47 @@
 <div class="sidebar bg-dark" [ngClass]="{'open': isSidebarOpen}" *ngIf="isLargeScreen || isSidebarOpen">
   <ul class="nav flex-column" style="margin-top: 40px;">
     <li class="nav-item">
-      <a class="nav-link" routerLink="/records"><i class="fa fa-chart-line"></i> Dashboard</a>
+      <a class="nav-link" routerLink="/records"><i class="fa fa-chart-line"></i> {{ 'Dashboard' | translate }}</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/farm-data"><i class="fa fa-book"></i> Records</a>
+      <a class="nav-link" routerLink="/farm-data"><i class="fa fa-book"></i> {{ 'Records' | translate }}</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/sales"><i class="fa fa-money-bill"></i> Sales</a>
+      <a class="nav-link" routerLink="/sales"><i class="fa fa-money-bill"></i> {{ 'Sales' | translate }}</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/expenses"><i class="fa fa-book"></i> Expenses</a>
+      <a class="nav-link" routerLink="/expenses"><i class="fa fa-book"></i>{{ 'Expenses' | translate }}</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/eggs-record-list"><i class="fa fa-egg"></i> Eggs Production</a>
+      <a class="nav-link" routerLink="/eggs-record-list"><i class="fa fa-egg"></i> {{ 'Eggs' | translate }}</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/workers"><i class="fa fa-people-group"></i> Workers</a>
+      <a class="nav-link" routerLink="/workers"><i class="fa fa-people-group"></i> {{ 'Workers' | translate }}</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/customers"><i class="fa fa-bag-shopping"></i> Customers</a>
+      <a class="nav-link" routerLink="/customers"><i class="fa fa-bag-shopping"></i> {{ 'Customers' | translate }}</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/mortalities"><i class="fa fa-skull-crossbones"></i> Mortalities</a>
+      <a class="nav-link" routerLink="/mortalities"><i class="fa fa-skull-crossbones"></i> {{ 'Mortalities' | translate }}</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="/our-services"><i class="fa fa-leaf"></i> Our Services</a>
+      <a class="nav-link" routerLink="/our-services"><i class="fa fa-leaf"></i> {{ 'Our Services' | translate }}</a>
     </li>
 
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"
       routerLinkActive="active-link" 
-      [routerLinkActiveOptions]="{ exact: true }" ><i class="fa fa-bars"></i> More</a>
+      [routerLinkActiveOptions]="{ exact: true }" ><i class="fa fa-bars"></i> {{ 'More' | translate }}</a>
       <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
         <li><a class="dropdown-item" (click)="navigateTo('/about-us')"
           routerLinkActive="active-link" 
-          [routerLinkActiveOptions]="{ exact: true }" >About Us</a></li>
+          [routerLinkActiveOptions]="{ exact: true }" >{{ 'About Us' | translate }}</a></li>
         <li><a class="dropdown-item" (click)="navigateTo('contact')"
           routerLinkActive="active-link" 
-  [routerLinkActiveOptions]="{ exact: true }">Contact Us</a></li>
+  [routerLinkActiveOptions]="{ exact: true }">{{ 'Contact Us' | translate }}</a></li>
         <li><a class="dropdown-item" (click)="navigateTo('/faq')"
           routerLinkActive="active-link" 
-  [routerLinkActiveOptions]="{ exact: true }">FAQ</a></li>
+  [routerLinkActiveOptions]="{ exact: true }">{{ 'FAG' | translate }}</a></li>
       </ul>
     </li>
   </ul>

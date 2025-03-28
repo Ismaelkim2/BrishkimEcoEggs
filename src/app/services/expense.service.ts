@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, catchError, throwError } from 'rxjs';
+import { Observable, BehaviorSubject, catchError, throwError, tap } from 'rxjs';
 import { environment } from '../../environments/environment.prod';
 
 export interface ExpenseRecord {
@@ -23,7 +23,7 @@ export class ExpenseService {
     this.fetchExpenseRecords();
   }
 
-  private fetchExpenseRecords(): void {
+   fetchExpenseRecords(): void {
     this.http.get<ExpenseRecord[]>(this.apiUrl).subscribe((records) => {
       this.expenseRecordsSubject.next(records);
     });
@@ -46,6 +46,17 @@ export class ExpenseService {
   }
 
   deleteExpenseRecord(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`).pipe(
+      catchError((error) => {
+        return throwError(() => new Error('Failed to delete expense record.'));
+      }),
+      // Update BehaviorSubject to remove deleted record
+      tap(() => {
+        const currentRecords = this.expenseRecordsSubject.getValue();
+        const updatedRecords = currentRecords.filter(expense => expense.id !== id);
+        this.expenseRecordsSubject.next(updatedRecords);
+      })
+    );
   }
+  
 }

@@ -74,7 +74,7 @@
 
 .navbar .btn-success {
   background-color: #caccce;
-  color: #44494e;
+  color: white;
   border: none;
   min-width: 100px; 
   padding: 0.5rem 1rem;
@@ -84,9 +84,10 @@
   font-weight: bold;
   border-radius: 5px;
 }
+
 .navbar .btn-success:hover {
   background-color: #666b71;
-  color: white;
+  color: rgb(47, 255, 109);
 }
 
 

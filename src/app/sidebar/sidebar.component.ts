@@ -9,6 +9,7 @@ import { Product } from '../models/product.model';
 
 import { RecordsService } from '../services/records.service';
 import { environment } from '../../environments/environment.prod';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -20,6 +21,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   recentActivities: string[] = [];
   isVibrating = false;
   private vibrationInterval: any;
+
+  currentLanguage: string = 'en';
 
   cart: Product[] = [];
   notification: string | null = null;
@@ -40,8 +43,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
     private dataService: DataServiceService,
     private router: Router,
     private cartService: CartService,
-    private recordsService: RecordsService
-  ) {}
+    private recordsService: RecordsService,
+    private translate: TranslateService
+  ) {
+    this.translate.setDefaultLang('en');
+  }
 
   ngOnInit(): void {
     this.recordsService.recentActivities$.subscribe(activities => {
@@ -99,6 +105,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.isLoggedInSubscription.unsubscribe();
     this.loggedInUserSubscription.unsubscribe();
     clearInterval(this.vibrationInterval);
+  }
+
+  toggleLanguage(): void {
+    this.currentLanguage = this.currentLanguage === 'en' ? 'sw' : 'en';
+    this.switchLanguage(this.currentLanguage);
+  }
+
+  switchLanguage(language: string) {
+    this.translate.use(language);
   }
 
   viewActivities(): void {

@@ -2,9 +2,9 @@
 .layout {
   display: flex;
   min-height: 100vh;
-  background-color: #f8f9fa;
   position: relative;
-  flex-direction: column; /* Make layout flexible for small screens */
+  flex-direction: column;
+  margin-left: 250px;
 }
 
 .main-content {
@@ -12,7 +12,8 @@
   flex: 1;
   padding: 20px;
   background-color: #f8f9fa;
-  margin-top: 80px;
+  margin-top: 70px;
+  max-width: 60%;
 }
 
 .container {
@@ -54,18 +55,20 @@
 }
 
 .accordion-button:not(.collapsed) {
-  background-color: #6ee6ae;
+  background-color:rgb(22, 141, 22);
   color: white;
 }
 
 @media (max-width: 768px) {
   .layout {
     flex-direction: column;
+    margin-left: 0;
   }
 
   .main-content {
     margin-left: 0;
     padding: 15px;
+    min-width: 100%;
   }
 
   .text-center h2 {
