@@ -29,6 +29,9 @@ export interface BirdRecord {
   type: string;
   id?: number;
   salesAmount: number;
+  batchId: string;
+  age: number;
+  breed: string;
 }
 
 export interface WeeklySummary {
