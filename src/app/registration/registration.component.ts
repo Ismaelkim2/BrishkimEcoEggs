@@ -72,9 +72,12 @@ export class RegistrationComponent {
   private submitRegistration(formData: FormData) {
     const apiUrl = `${environment.apiUrl}/api/user/create`;
     this.http.post(apiUrl, formData).subscribe(
-      () => {
+      (res: any) => {  // <-- Add 'res' here to capture the response
         this.resetForm();
         this.success = 'Registration successful. Redirecting to login...';
+        this.success = 'Registration successful. Redirecting to login...';
+        localStorage.setItem('registeredEmail', res.email || this.formData.email);
+        localStorage.setItem('registeredPhone', res.phoneNumber || this.formData.phoneNumber);
         setTimeout(() => this.router.navigate(['/login']), 3000);
       },
       (error) => {

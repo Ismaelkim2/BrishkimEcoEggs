@@ -64,6 +64,7 @@ import { ArchivedEggRecordsComponent } from './eggs-record-list/archived-egg-rec
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -111,7 +112,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     DetailViewComponent,
     ActivitiesComponent,
     NotificationComponent,
-    ArchivedEggRecordsComponent
+    ArchivedEggRecordsComponent,
+    ForgotpasswordComponent
   
    
   ],

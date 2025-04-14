@@ -4,9 +4,9 @@
 
     <div class="formdiv">
       <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-        <div class="welcome-message">
-          <h3>Welcome to Brishkim Eco-Eggs</h3>
-          <p>Manage your poultry farm with ease</p>
+        <div class="welcome-message align-items-center fw-bold">
+          <h3>Hello, {{Greeting}}</h3>
+          <!-- <h3>Login</h3> -->
         </div>
 
         <div *ngIf="loading" class="spinner-overlay">

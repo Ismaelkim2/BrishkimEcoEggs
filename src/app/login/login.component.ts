@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataServiceService } from './../data-service.service';
 import { ToastrService } from 'ngx-toastr';
@@ -12,7 +12,8 @@ export interface AuthResponse {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  Greeting: string='';
   phoneNumber: string = '';
   password: string = '';
   showPassword: boolean = false;
@@ -24,6 +25,23 @@ export class LoginComponent {
     private router: Router,
     private toastr: ToastrService,
   ) {}
+
+  ngOnInit() {
+    this.setGreetings();
+    setInterval(()=>this.setGreetings(),6000);
+  }
+
+  setGreetings(){
+    const currenthour= new Date().getHours();
+    if (currenthour<12){
+      this.Greeting='Good Morning';
+    } else if(currenthour<18){
+      this.Greeting='Good afternoon';
+    }else{
+      this.Greeting='Good evening'
+    }
+
+  }
 
   onPhoneNumberInput(event: Event): void {
     const target = event.target as HTMLInputElement;
@@ -80,6 +98,6 @@ export class LoginComponent {
   }
 
   navigateToForgotPassword() {
-    this.router.navigate(['/forgot-password']);
+    this.router.navigate(['forgotpassword']);
   }
 }
