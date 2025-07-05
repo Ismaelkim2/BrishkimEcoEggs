@@ -1,29 +1,33 @@
 <app-sidebar></app-sidebar>
 
 <div class="main-container">
+  <!-- Header Section -->
   <div class="d-flex justify-content-between align-items-center mb-3 mt-2">
     <h3>Farm Records</h3>
-    <button class="btn btn-success" (click)="toggleModal()" data-bs-toggle="tooltip" title="Add new record">
+    <button class="btn btn-success" (click)="toggleModal()" title="Add new record">
       Add Hatch
     </button>
   </div>
 
+  <!-- Search Bar -->
   <div class="input-group mb-3">
     <input type="text" class="form-control" placeholder="Search by breed or batchId..." [(ngModel)]="filterTerm" (input)="applyFilter()" />
   </div>
 
+  <!-- Empty State -->
   <div *ngIf="filteredPoultryRecords.length === 0" class="alert alert-info">
     No records found.
   </div>
 
+  <!-- Poultry Cards -->
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
     <div *ngFor="let record of filteredPoultryRecords.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage); let i = index" class="col">
       <div class="card shadow-sm h-100">
         <div class="card-body">
-          <h5 class="card-title"> Batch No: BK{{ record.date }}</h5>
+          <h5 class="card-title">Batch No: BK{{ record.date | date:'yyyyMMdd' }}</h5>
           <p class="card-text">
-            <span class="fw-bold"> Breed:</span> {{ record.birdType }} <br>
-           <span class="fw-bold">No:</span> {{ record.count }} <br />
+            <span class="fw-bold">Breed:</span> {{ record.birdType }} <br />
+            <span class="fw-bold">No:</span> {{ record.count }} <br />
             <span class="fw-bold">Age:</span> {{ calculateDescriptiveAge(record.date) }} old <br />
             <span class="fw-bold">Feed on:</span> {{ getFeedType(calculateAgeInDays(record.date)) }} <br />
             <span class="fw-bold">Sold:</span>
@@ -45,7 +49,6 @@
       <li class="page-item" [class.disabled]="currentPage === 1">
         <button class="page-link" (click)="currentPage = currentPage - 1">&laquo;</button>
       </li>
-
       <li
         class="page-item"
         *ngFor="let page of [].constructor(Math.ceil(filteredPoultryRecords.length / itemsPerPage)); let p = index"
@@ -53,7 +56,6 @@
       >
         <button class="page-link" (click)="currentPage = p + 1">{{ p + 1 }}</button>
       </li>
-
       <li class="page-item" [class.disabled]="currentPage === Math.ceil(filteredPoultryRecords.length / itemsPerPage)">
         <button class="page-link" (click)="currentPage = currentPage + 1">&raquo;</button>
       </li>
@@ -71,15 +73,15 @@
         <div class="modal-body">
           <div class="mb-2">
             <label class="form-label">Date</label>
-            <input type="date" class="form-control" [(ngModel)]="newVaccination.date" />
+            <input type="date" class="form-control" [(ngModel)]="newVaccination.date" name="vaccineDate" />
           </div>
           <div class="mb-2">
             <label class="form-label">Vaccine Name</label>
-            <input type="text" class="form-control" [(ngModel)]="newVaccination.name" />
+            <input type="text" class="form-control" [(ngModel)]="newVaccination.name" name="vaccineName" />
           </div>
           <div class="mb-2">
             <label class="form-label">Recommendation</label>
-            <input type="text" class="form-control" [(ngModel)]="newVaccination.recommendation" disabled />
+            <input type="text" class="form-control" [(ngModel)]="newVaccination.recommendation" name="recommendation" disabled />
           </div>
         </div>
         <div class="modal-footer">
@@ -89,29 +91,28 @@
       </div>
     </div>
   </div>
-</div>
+
+  
 
 <!-- Add New Record Modal -->
-<div class="modal" [ngClass]="{'show': isModalOpen}" tabindex="-1" role="dialog" *ngIf="isModalOpen && !isEditMode" @modalAnimation>
+<div class="modal fade show" *ngIf="isModalOpen && !isEditMode" style="display:block;" tabindex="-1" @modalAnimation>
   <div class="modal-dialog modal-bottom">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title"><i class="fa fa-plus"></i> Record new flock</h5>
-        <button type="button" class="close" (click)="closeModal()" aria-label="Close">
-          <span aria-hidden="true" style="color: red; font-weight: bold; cursor: pointer;">&times;</span>
-        </button>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
       </div>
       <div class="modal-body">
         <form (ngSubmit)="onSubmit()">
-          <div class="form-group">
+          <div class="form-group mb-2">
             <label for="hatchDate">Hatch Date:</label>
             <input id="hatchDate" type="date" class="form-control" [(ngModel)]="newHatchData.hatchDate" name="hatchDate" required />
           </div>
-          <div class="form-group">
+          <div class="form-group mb-2">
             <label for="birdType">Bird Type:</label>
             <input id="birdType" type="text" class="form-control" [(ngModel)]="newHatchData.birdType" name="birdType" required />
           </div>
-          <div class="form-group">
+          <div class="form-group mb-2">
             <label for="birdCount">Bird Count:</label>
             <input id="birdCount" type="number" class="form-control" [(ngModel)]="newHatchData.birdCount" name="birdCount" required />
           </div>
@@ -123,27 +124,24 @@
 </div>
 
 <!-- Edit Record Modal -->
-<div class="modal" [ngClass]="{'show': isModalOpen}" tabindex="-1" role="dialog" *ngIf="isModalOpen && isEditMode" @modalAnimation>
+<div class="modal fade show" *ngIf="isModalOpen && isEditMode" style="display:block;" tabindex="-1" @modalAnimation>
   <div class="modal-dialog modal-bottom">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title"><i class="fa fa-edit"></i> Edit Record</h5>
-        <button type="button" class="close" (click)="closeModal()" aria-label="Close">
-          <span aria-hidden="true" style="color: red; font-weight: bold; cursor: pointer;">&times;</span>
-        </button>
-        
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
       </div>
       <div class="modal-body">
         <form (ngSubmit)="saveEdit()">
-          <div class="form-group">
+          <div class="form-group mb-2">
             <label for="editHatchDate">Hatch Date:</label>
             <input id="editHatchDate" type="date" class="form-control" [(ngModel)]="formData.hatchDate" name="editHatchDate" required />
           </div>
-          <div class="form-group">
+          <div class="form-group mb-2">
             <label for="editBirdType">Bird Type:</label>
             <input id="editBirdType" type="text" class="form-control" [(ngModel)]="formData.birdType" name="editBirdType" required />
           </div>
-          <div class="form-group">
+          <div class="form-group mb-2">
             <label for="editBirdCount">Bird Count:</label>
             <input id="editBirdCount" type="number" class="form-control" [(ngModel)]="formData.birdCount" name="editBirdCount" required />
           </div>

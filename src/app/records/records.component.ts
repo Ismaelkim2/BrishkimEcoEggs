@@ -323,4 +323,26 @@ export class RecordsComponent implements OnInit {
    get effectiveTotalBirds(): number {
     return this.totalBirds - this.totalMortalities;
   }
+
+  latestActions: string[] = [
+    'Added 50 broilers on 2025-04-15',
+    'Updated flock record BK2025-04-10',
+    'Deleted batch BK2025-04-05',
+    'Vaccination recorded for BK2025-04-01',
+    // add more as needed
+  ];
+  
+  navigateTo(destination: string) {
+    // Example for now; replace with actual navigation logic
+    alert(`Redirecting to ${destination}...`);
+  }
+  
+  viewAllActions() {
+    alert('Redirecting to all activity logs...');
+  }
+
+  toggleModal(){
+
+  }
+  
 }

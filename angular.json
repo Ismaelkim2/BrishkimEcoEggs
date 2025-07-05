@@ -31,7 +31,6 @@
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "node_modules/@fortawesome/fontawesome-free/js/all.min.js",
               "node_modules/chart.js/dist/chart.min.js"
             ]
@@ -70,6 +69,6 @@
     }
   },
   "cli": {
-    "analytics": "8fe3ab8e-475d-4c93-863b-f9c952205ef5"
+    "analytics": "false"
   }
 }

@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "serve -s dist/farm-market",
-    "build": "ng build --prod",
+    "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:farm-market": "node dist/farm-market/server/server.mjs"

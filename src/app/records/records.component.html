@@ -1,39 +1,54 @@
 
 <app-sidebar></app-sidebar>
 
-<div class="hello-admin-container">
-  <h3 class="text-dark">Hello, Admin 😊</h3>
-</div>
+<div class="wrapper">
+  <!-- <aside class="sidebar">Sidebar</aside> -->
+  <main class="main-content">
+    <div class="hello-admin-container text-center">
+      <h3 style="justify-content: center; text-align: center;">Hello Admin</h3>
+    </div>
 
-<div class="container-fluid main-content">
+<div class="container-fluid ">
   <div class="chart-title text-center">
-    <h3 class="fw-bold text-primary fs-3">Production Overview</h3>
+    <h3 class="fw-bold text-primary fs-3 mt-4">Production Overview</h3>
     <p class="text-muted">visual representations of annual poultry production trends and metrics.</p>
   </div>
 
   <div class="grid-container">
   
-    <div class="card summary-card">
-      <div class="card-body bg-white text-center position-relative">
-        <h5 class="my-2">
-          <i class="fa fa-chart-bar text-success me-2"></i>Sales
-          <button (click)="toggleVisibility('sales')" class="toggle-btn">
-            <i class="fa" [ngClass]="{ 'fa-eye': showSales, 'fa-eye-slash': !showSales }"></i>
-          </button>
-        </h5>
-        <div><hr></div>
-        <div>
-          <strong *ngIf="showSales" class="display-6 text-success">{{ totalSalesAmount | currency: 'Kes.' }}</strong>
-          <strong *ngIf="!showSales" class="text-muted">----</strong>
-        </div>
-        <div class="progress mt-3">
-          <div class="progress-bar bg-success" [style.width.%]="salesProgress" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <div class="text-center mt-2">
-          <strong>{{ salesProgress | number: '1.0-0' }}%</strong>
-        </div>
-      </div>
+   <!-- SALES & CUSTOMERS COMBINED CARD -->
+<div class="card summary-card bg-white shadow-sm border-start border-success border-1">
+  <div class="card-body text-center position-relative">
+    <h5 class="my-2">
+      <i class="fa fa-chart-bar text-success me-2"></i>Sales & Customers
+    </h5>
+    <hr />
+
+    <!-- Sales Display -->
+    <div class="mb-3">
+      <strong *ngIf="showSales" class="display-6 text-success">{{ totalSalesAmount | currency: 'Kes.' }}</strong>
+      <strong *ngIf="!showSales" class="text-muted">----</strong>
+      <button (click)="toggleVisibility('sales')" class="toggle-btn ms-2">
+        <i class="fa" [ngClass]="{ 'fa-eye': showSales, 'fa-eye-slash': !showSales }"></i>
+      </button>
     </div>
+    <div class="progress mb-2">
+      <div class="progress-bar bg-success" [style.width.%]="salesProgress" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <div class="text-muted mb-4">
+      <strong>{{ salesProgress | number: '1.0-0' }}%</strong>
+    </div>
+
+    <!-- Customer Count -->
+    <div>
+      <strong *ngIf="showTotalBirds" class="display-6 fw-bold">{{ totalCustomers }} <i class="fa fa-user-check text-primary"></i></strong>
+      <strong *ngIf="!showTotalBirds" class="text-muted">----</strong>
+      <button (click)="toggleVisibility('totalBirds')" class="toggle-btn ms-2">
+        <i class="fa" [ngClass]="{ 'fa-eye': showTotalBirds, 'fa-eye-slash': !showTotalBirds }"></i>
+      </button>
+    </div>
+  </div>
+</div>
 
     <!-- Card 2: Expenses -->
       <div class="card summary-card">
@@ -101,54 +116,37 @@
         </div>
       </div>
       
-      <div class="card summary-card">
-        <div class="card-body bg-light text-center">
-          <div class="d-flex justify-content-between">
-           <h5 class="my-2">
-            <i class="fa fa-people-roof text-dark me-2"></i>CUST
-              <button (click)="toggleVisibility('totalBirds')" class="toggle-btn">
-                <i class="fa" [ngClass]="{ 'fa-eye': showTotalBirds, 'fa-eye-slash': !showTotalBirds }"></i>
-              </button>
-          </h5>
-          </div>
-          <div><hr></div>
-          <h5 class="mt-1">
-            <strong *ngIf="showTotalBirds" class="display-6 fw-bold">{{totalCustomers}} <i class="fa fa-check-to-slot text-success"></i></strong>
-            <strong *ngIf="!showTotalBirds" class="text-muted">----</strong>
-          </h5>
-    
-          <!-- <button class="btn btn-outline-primary mt-3" [routerLink]="['/details', 'birds']">
-            View More <i class="fa fa-arrow-right"></i>
-          </button>
-       -->
-          
-        </div>
-      </div>
+     
 
-   <div class="card summary-card">
-      <div class="card-body bg-light text-center">
-        <div class="d-flex justify-content-between">
-          <h5 class="my-2"><i class="fa fa-dove text-warning me-2">
+<!-- BIRDS & MORTALITY RATE COMBINED CARD -->
+<div class="card summary-card bg-light shadow-sm border-start border-warning border-4">
+  <div class="card-body text-center position-relative">
+    <h5 class="my-2">
+      <i class="fa fa-dove text-warning me-2"></i>Birds & Mort Rate
+    </h5>
+    <hr />
 
-          </i>Birds
-          <div>
-            <button (click)="toggleVisibility('totalBirds')" class="toggle-btn ">
-              <i class="fa" [ngClass]="{ 'fa-eye': showTotalBirds, 'fa-eye-slash': !showTotalBirds }"></i>
-            </button>
-          </div>
-        </h5>
-        </div>
-        <div><hr></div>
-        <h5 class="mt-1">
-          <strong *ngIf="showTotalBirds" class="display-6 fw-bold">{{ effectiveTotalBirds }} <i class="fa fa-check-to-slot text-success"></i></strong>
-          <strong *ngIf="!showTotalBirds" class="text-muted">----</strong>
-        </h5>
-  
-      </div>
+    <!-- Total Birds -->
+    <div class="mb-3">
+      <strong *ngIf="showTotalBirds" class="display-6 fw-bold">{{ effectiveTotalBirds }} <i class="fa fa-check-circle text-success"></i></strong>
+      <strong *ngIf="!showTotalBirds" class="text-muted">----</strong>
     </div>
- 
+
+    <!-- Mortality Rate -->
+    <div>
+      <strong *ngIf="showTotalBirds" class="display-6 text-danger">
+        <i class="fa fa-skull-crossbones me-2"></i> {{ (totalMortalities / totalBirds) * 100 | number:'1.0-2' }}%
+      </strong>
+      <strong *ngIf="!showTotalBirds" class="text-muted">----</strong>
+      <button (click)="toggleVisibility('totalBirds')" class="toggle-btn ms-2">
+        <i class="fa" [ngClass]="{ 'fa-eye': showTotalBirds, 'fa-eye-slash': !showTotalBirds }"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
     
-    <div class="card summary-card">
+    <!-- <div class="card summary-card">
       <div class="card-body bg-light text-center">
         <div class="d-flex justify-content-between">
           <h5 class="my-2">
@@ -160,13 +158,35 @@
         </div>
         <div><hr></div>
         <h5>
-          <strong *ngIf="showTotalBirds" class="display-6 text-danger">Rate: {{(totalMortalities/totalBirds )*100 | number:'1.0-2'}}% </strong>
+          <strong *ngIf="showTotalBirds" class="display-6 text-danger"> <i class="fa fa-skull-crossbones text-danger me-2"></i>MORT Rate: {{(totalMortalities/totalBirds )*100 | number:'1.0-2'}}% </strong>
           <strong *ngIf="!showTotalBirds" class="text-muted">----</strong>
         </h5>
   
       </div>
+    </div> -->
+    <div class="card summary-card bg-white shadow-sm border-start border-success border-3">
+      <div class="card-body text-center position-relative w-100">
+        <h5 class="card-title">
+          <i class="fa fa-bolt text-success me-2"></i>Quick Actions
+        </h5>
+        <hr />
+    
+        <!-- Use Bootstrap's flex utilities -->
+        <div class="d-flex flex-wrap flex-row flex-lg-column justify-content-center align-items-center gap-2">
+          <button class="btn btn-outline-success btn-sm">+ Add Hatch</button>
+          <button class="btn btn-outline-primary btn-sm">Feed Schedule</button>
+          <button class="btn btn-outline-info btn-sm">Reports</button>
+          <button class="btn btn-outline-warning btn-sm">Settings</button>
+        </div>
+      </div>
     </div>
+    
+    
   </div>
+
+
+ 
+
 
 
 
@@ -174,62 +194,82 @@
     <hr>
   </div>
 
-
-  <div class="container-fluid2 mt-4">
-    <div class="d-flex flex-column flex-lg-row">
-      <!-- Chart Section -->
-      <div class="chart-container flex-grow-1 me-lg-3">
-        <h3 class="fw-bold text-success">Sales &Expense Production Trend</h3>
-        <div class="card shadow-lg">
+  <div class="container-fluid2 mt-4 mb-2">
+    <div class="d-flex flex-column flex-lg-row align-items-stretch gap-3">
+    
+      <!-- Chart Section (70%) -->
+      <div class="chart-container col-lg-8 col-12">
+        <h3 class="fw-bold text-success">Sales & Expense Production Trend</h3>
+        <div class="card shadow-lg h-60">
           <div class="card-body">
             <canvas id="salesExpenseChart"></canvas>
           </div>
         </div>
       </div>
   
-      <!-- Table Section -->
-      <div class="table-container flex-grow-1 mt-4 mt-lg-0">
-        <h3 class="fw-bold text-success">Monthly production Records</h3>
-        <div class="table-responsive shadow-sm rounded">
-          <table class="table table-hover table-bordered">
-            <thead class="bg-success text-light">
-              <tr>
-                <th>Month</th>
-                <th>Total Sales</th>
-                <th>Total Expenditure</th>
-                <th>Profit</th>
-              </tr>
-            </thead>
-            <tbody *ngIf="!noDataForYear; else noDataTemplate">
-              <tr *ngFor="let month of getFilteredMonthlyRecords() | slice: (currentPage - 1) * itemsPerPage : currentPage * itemsPerPage">
-                <td>{{ month }} {{ selectedYear }}</td>
-                <td>{{ monthlySales[getMonthIndex(month) + 1] || 0 | currency: 'Kes.' }}</td>
-                <td>{{ monthlyExpenses[getMonthIndex(month) + 1] || 0 | currency: 'Kes.' }}</td>
-                <td [ngClass]="{
-                    'text-success': (monthlySales[getMonthIndex(month) + 1] || 0) - (monthlyExpenses[getMonthIndex(month) + 1] || 0) > 0,
-                    'text-danger': (monthlySales[getMonthIndex(month) + 1] || 0) - (monthlyExpenses[getMonthIndex(month) + 1] || 0) <= 0
-                  }">
-                  {{ (monthlySales[getMonthIndex(month) + 1] || 0) - (monthlyExpenses[getMonthIndex(month) + 1] || 0) | currency: 'Kes.' }}
-                </td>
-              </tr>
-            </tbody>
-            <ng-template #noDataTemplate>
-              <tr>
-                <td colspan="4" class="text-center text-danger fw-bold">No records available for this year</td>
-              </tr>
-            </ng-template>
-          </table>
+      <!-- Overview Section (30%) -->
+      <div class="overview-container col-lg-4 col-12  mt-5">
+        <div class="card shadow-sm border-start border-primary border-3 h-100">
+          <div class="card-body">
+            <h5 class="card-title">Latest Actions</h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngFor="let action of latestActions.slice(0, 4)">
+                <i class="fa fa-check-circle text-success me-2"></i>
+                {{ action }}
+              </li>
+              <li class="list-group-item text-center text-primary" style="cursor: pointer;" (click)="viewAllActions()">View all</li>
+            </ul>
+          </div>
         </div>
-
-        <div class="pagination-controls mt-3">
-          <button (click)="previousPage()" class="btn btn-outline-success">Previous</button>
-          <span >Page {{ currentPage }} of {{ totalPages }}</span>
-          <button (click)="nextPage()" class="btn btn-outline-success">Next</button>
-        </div>
-
       </div>
+  
     </div>
   </div>
   
+
+
+ <!-- Table Section -->
+ <div class="table-container flex-grow-1 mt-5 mt-lg-0">
+  <h3 class="fw-bold text-success">Monthly production Records</h3>
+  <div class="table-responsive shadow-sm rounded">
+    <table class="table table-hover table-bordered">
+      <thead class="bg-success text-light">
+        <tr>
+          <th>Month</th>
+          <th>Total Sales</th>
+          <th>Total Expenditure</th>
+          <th>Profit</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="!noDataForYear; else noDataTemplate">
+        <tr *ngFor="let month of getFilteredMonthlyRecords() | slice: (currentPage - 1) * itemsPerPage : currentPage * itemsPerPage">
+          <td>{{ month }} {{ selectedYear }}</td>
+          <td>{{ monthlySales[getMonthIndex(month) + 1] || 0 | currency: 'Kes.' }}</td>
+          <td>{{ monthlyExpenses[getMonthIndex(month) + 1] || 0 | currency: 'Kes.' }}</td>
+          <td [ngClass]="{
+              'text-success': (monthlySales[getMonthIndex(month) + 1] || 0) - (monthlyExpenses[getMonthIndex(month) + 1] || 0) > 0,
+              'text-danger': (monthlySales[getMonthIndex(month) + 1] || 0) - (monthlyExpenses[getMonthIndex(month) + 1] || 0) <= 0
+            }">
+            {{ (monthlySales[getMonthIndex(month) + 1] || 0) - (monthlyExpenses[getMonthIndex(month) + 1] || 0) | currency: 'Kes.' }}
+          </td>
+        </tr>
+      </tbody>
+      <ng-template #noDataTemplate>
+        <tr>
+          <td colspan="4" class="text-center text-danger fw-bold">No records available for this year</td>
+        </tr>
+      </ng-template>
+    </table>
+  </div>
+
+  <div class="pagination-controls mt-3">
+    <button (click)="previousPage()" class="btn btn-outline-success">Previous</button>
+    <span >Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" class="btn btn-outline-success">Next</button>
+  </div>
+
 </div>
+
+</div>
+
 
