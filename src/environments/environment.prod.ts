@@ -1,6 +1,6 @@
 export const environment = {
       production: true,
-      apiUrl: 'https://backend-springboot-apis.onrender.com',
+      apiUrl: 'https://updated-backend-springboot-apis-production.up.railway.app/api',
       cloudinaryCloudName: 'Ismael',  
       cloudinaryUrl: 'https://api.cloudinary.com/v1_1/dg70z4hug/upload',
       cloudinaryPreset: 'custom_upload_preset',
